@@ -16,6 +16,7 @@ cd <название репозитория>
 python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
+cd /ml
 wget "https://storage.yandexcloud.net/cloud-certs/CA.pem" - токен для поключения к базе
 ```
 
