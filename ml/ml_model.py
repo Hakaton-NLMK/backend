@@ -1,9 +1,11 @@
 from langchain_community.llms import YandexGPT
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from var import  model_uri
+from variables import model_uri
 from db import docsearch
 from auth import generateToken
+
+
 
 iam_token = generateToken()
 

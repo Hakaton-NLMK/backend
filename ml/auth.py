@@ -2,7 +2,7 @@ import requests
 import json
 import time
 import jwt
-from var import service_account_id, key_id
+from variables import service_account_id, key_id
 
 def generateToken():
     with open('ml/authorized_key.json') as f:
