@@ -14,3 +14,4 @@ def connectDataBase():
 embeddings = YandexGPTEmbeddings(iam_token=generateToken(), folder_id=folder)
 ch_config = ClickhouseSettings(host=HOST, port=PORT, username=USER, password=PASSWORD)
 docsearch = Clickhouse(embedding=embeddings, config=ch_config, verify=VERIFY, ca_cert=CA)
+

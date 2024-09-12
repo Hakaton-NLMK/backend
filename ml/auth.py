@@ -5,7 +5,7 @@ import jwt
 from var import service_account_id, key_id
 
 def generateToken():
-    with open('../authorized_key.json') as f:
+    with open('ml/authorized_key.json') as f:
         authorized_key = json.load(f)
 
     private_key = authorized_key['private_key']
@@ -25,5 +25,4 @@ def generateToken():
     x = requests.post(url,  headers={'Content-Type': 'application/json'}, json = {'jwt': encoded_token}).json()
     iam_token = x['iamToken']
     return iam_token  
-
-
+    
