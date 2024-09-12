@@ -37,3 +37,4 @@ sudo ufw enable - включение файрвола
 sudo nano /etc/nginx/sites-enabled/default - создание конфигурационного файла http-сервера (пример в репозитории)
 sudo systemctl start nginx  - запуск http-сервера
 ```
+
