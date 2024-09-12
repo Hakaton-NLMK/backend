@@ -1,0 +1,11 @@
+CA = '../CA.pem' # если вы не меняли путь при скачивании сертификата
+VERIFY = True
+SECURE = True
+USER = 'admin'
+PASSWORD = 'hakaton1'
+HOST = "rc1d-uq593a42e02ikh2k.mdb.yandexcloud.net" # адрес Clickhouse
+PORT = 8443
+folder = 'b1g01stbeeo96j8kfaiv'
+service_account_id = "aje286em9u4ibs8572di"
+key_id = 'ajeo9id7551hpq15fv3o'
+model_uri = f'gpt://{folder}/yandexgpt/latest'
