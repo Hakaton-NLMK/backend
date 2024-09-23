@@ -9,3 +9,4 @@ folder = 'b1g01stbeeo96j8kfaiv'
 service_account_id = "aje286em9u4ibs8572di"
 key_id = 'ajeo9id7551hpq15fv3o'
 model_uri = f'gpt://{folder}/yandexgpt/latest'
+token_m = '' #add token
