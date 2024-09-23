@@ -2,6 +2,7 @@ from langchain_community.llms import YandexGPT
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
+from .model import API_Model_GPT
 from .variables import model_uri
 from .db import docsearch
 from .auth import generateToken
@@ -14,6 +15,7 @@ retriever = docsearch.as_retriever(
     search_type="similarity_score_threshold",
     search_kwargs={"k": 3, "score_threshold": 0.1},
 )
+
 
 def create_component(request): 
     question = request
@@ -41,7 +43,8 @@ def create_component(request):
     """
     prompt_decomposition = ChatPromptTemplate.from_template(template)
 
-    stupid = YandexGPT(iam_token=iam_token, model_uri=model_uri, tempreture=0)
+    # stupid = YandexGPT(iam_token=iam_token, model_uri=model_uri, tempreture=0)
+    stupid = API_Model_GPT()
 
     generate_queries_decomposition = ( prompt_decomposition | stupid | StrOutputParser() | (lambda x: x.replace('\n\n','\n')))
 
@@ -68,7 +71,8 @@ def create_component(request):
 
 
     prompt = ChatPromptTemplate.from_template(template)
-    llm = YandexGPT(iam_token=iam_token, model_uri=model_uri, tempreture=0.35)
+    # llm = YandexGPT(iam_token=iam_token, model_uri=model_uri, tempreture=0.35)
+    llm = API_Model_GPT()
 
     chain = prompt | llm
     results = docsearch.similarity_search(query=question, k=30)
