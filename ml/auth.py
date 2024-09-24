@@ -26,3 +26,4 @@ def generateToken():
     iam_token = x['iamToken']
     return iam_token  
     
+print(generateToken())
