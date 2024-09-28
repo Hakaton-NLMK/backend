@@ -27,9 +27,10 @@ class API:
     def send_message(self, text):
         data = {
             "model": "gpt-4-turbo",
-            "messages": [{"role": "user", "content": text}]
+            "messages": [{"role": "system","content":"You are generator javascript code, that must use nlmk сomponents. Pay attention to not write jsx/javascript in the beginning of the script, because the user already has it."},{"role": "user", "content": text}]
         }
         path = ""
+        print(data)
         return post_request(data, path)
 
 

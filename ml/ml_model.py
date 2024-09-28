@@ -7,8 +7,6 @@ from .variables import grid_description
 from .db import docsearch
 from .auth import generateToken
 
-
-
 iam_token = generateToken()
 
 retriever = docsearch.as_retriever(
@@ -17,7 +15,7 @@ retriever = docsearch.as_retriever(
 )
 
 
-def create_component(request): 
+def create_component(request):
     question = request
 
     template = """
@@ -46,7 +44,8 @@ def create_component(request):
     # stupid = YandexGPT(iam_token=iam_token, model_uri=model_uri, tempreture=0)
     stupid = API_Model_GPT()
 
-    generate_queries_decomposition = ( prompt_decomposition | stupid | StrOutputParser() | (lambda x: x.replace('\n\n','\n')))
+    generate_queries_decomposition = (
+                prompt_decomposition | stupid | StrOutputParser() | (lambda x: x.replace('\n\n', '\n')))
 
     # Run
     question = generate_queries_decomposition.invoke({"question": question})
@@ -69,16 +68,28 @@ def create_component(request):
         Вопрос: {question}
     """
 
-
-
     prompt = ChatPromptTemplate.from_template(template)
     # llm = YandexGPT(iam_token=iam_token, model_uri=model_uri, tempreture=0.35)
     llm = API_Model_GPT()
 
     chain = prompt | llm
-    results = docsearch.similarity_search(query=question, k=30)
-    context = grid_description
+    results = docsearch.similarity_search(query=question, k=9)
+    context = results[0].page_content + results[1].page_content + results[2].page_content + results[3].page_content + \
+              results[4].page_content + results[5].page_content + results[6].page_content + results[7].page_content + \
+              results[8].page_content + grid_description
 
-    ans = chain.invoke({'question':question,'context':context}).split('```')[1]
-
+    ans = chain.invoke({'question': question, 'context': context})
+    ans =  clean_ans (ans)
     return ans
+
+
+def clean_ans (ans):
+    if '```' in ans:
+        ans = ans.split('```')[1]
+    parts = ans.split('\n')
+    if len(parts) > 1 and ('javascript' in parts[0] or 'jsx' in parts[0]):
+        ans = '\n'.join(parts[1:])
+    if len(parts) > 2 and ('javascript' in parts[1] or 'jsx' in parts[1]):
+        ans = '\n'.join(parts[2:])
+    return ans
+
