@@ -27,12 +27,13 @@ class API:
     def send_message(self, text):
         data = {
             "model": "gpt-4-turbo",
-            "messages": [{"role": "system","content":"You are generator javascript code, that must use nlmk сomponents. Pay attention to not write jsx/javascript in the beginning of the script, because the user already has it."},{"role": "user", "content": text}]
+            "messages": [{"role": "system",
+                          "content": "You are generator javascript code, that must use nlmk сomponents. Pay attention to not write jsx/javascript in the beginning of the script, because the user already has it.don't forget to use import, for example: export default App;"},
+                         {"role": "user", "content": text}]
         }
         path = ""
         print(data)
         return post_request(data, path)
-
 
 
 def handle_response(response):
@@ -43,6 +44,7 @@ def handle_response(response):
         print(response.status_code)
         print(response.json())
         raise Exception('bad ans')
+
 
 def post_request(data, path, headers=headers, BASE_URL=BASE_URL):
     response = requests.post(BASE_URL + path, headers=headers, json=data)
@@ -55,6 +57,7 @@ def post_request(data, path, headers=headers, BASE_URL=BASE_URL):
 class API_Model(LLM):
     """ send request to api
      conversation_id - """
+
     def init(self, **kwargs: Any):
         super().init(**kwargs)
 
@@ -67,13 +70,14 @@ class API_Model(LLM):
         message = self.api.send_message(prompt)
         output = message
         return output
+
     @property
     def _identifying_params(self) -> Mapping[str, Any]:
         return {"name_of_model": self.model_name}
+
     @property
     def _llm_type(self) -> str:
         return "api_model"
-
 
 
 class API_Model_GPT(API_Model):
