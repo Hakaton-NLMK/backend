@@ -8,8 +8,8 @@ PORT = 8443
 
 
 folder = 'b1gkt5jnf1leugqln1r2'
-service_account_id = "aje5pioh6p7gf1dul700"
-key_id = "aje5f7a5t7mfsdvcrj1f"
+service_account_id = "ajeun4aue16or4mk4lta"
+key_id = "aje4oomur6fvun8ss6ml"
 model_uri = f'gpt://{folder}/yandexgpt/latest'
 
 key_api = 'sk-kllZ7MZAyhbzNJVpWfT7SPxDtI2jkJXi'
