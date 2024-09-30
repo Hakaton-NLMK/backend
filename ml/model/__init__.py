@@ -28,7 +28,10 @@ class API:
         data = {
             "model": "gpt-4-turbo",
             "messages": [{"role": "system",
-                          "content": "You are generator javascript code, that must use nlmk сomponents. Pay attention to not write jsx/javascript in the beginning of the script, because the user already has it.don't forget to use import, for example: export default App;"},
+                          "content": """You are generator javascript code, that must use nlmk сomponents. 
+                          Pay attention to not write jsx/javascript in the beginning of the script, 
+                          because the user already has it.don't forget to use export, for example: export default App; 
+                          Pay attention to import NLMK сomponents. You must not invent new type NLMK сomponents(like Footer) """},
                          {"role": "user", "content": text}]
         }
         path = ""
